@@ -1,0 +1,28 @@
+@import "style/theme";
+
+@keyframes Logo-spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.Logo-icon {
+    padding-right: $default-spacing * 4;
+    height: 64px;
+
+    #gear {
+        transform-origin: 50.75% 53%;
+    }
+}
+
+.Logo-icon.spinning #gear {
+    animation: Logo-spin 10s infinite linear;
+}
+
+.Logo-icon.error #gear {
+  fill: $color-primary;
+}

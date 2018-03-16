@@ -5,8 +5,8 @@ import { repeat } from "lodash";
 import { LevelItem } from "../LevelItem";
 import { Search } from "../Search";
 import { SearchResults } from "../SearchResults";
+import { Logo } from "../Logo";
 
-import logo from "../../img/logo-revival-nout.png";
 import "./styles.scss";
 
 
@@ -18,7 +18,7 @@ interface Props {}
 
 interface State {
     query: string;
-    loading: boolean;
+    status?: boolean;
 }
 
 
@@ -31,15 +31,15 @@ class App extends React.Component<Props, State> {
 
         this.state = {
             query: "",
-            loading: false,
+            status: true,
         };
     }
 
     render() {
-        const { query, loading } = this.state;
+        const { query, status } = this.state;
 
         if (
-            !loading
+            status != null
             && this.container != null
             && this.resultsList != null
             && this.resultsList.canLoadMore()
@@ -49,11 +49,10 @@ class App extends React.Component<Props, State> {
 
         return <div className="App">
             <nav>
-                <img src={logo} />
+                <Logo loading={status == null} error={status === false}/>
                 <Search
                     query={query}
                     queryChange={q => this.setState({query: q})}
-                    search={() => this.setState({loading: true})}
                 />
             </nav>
             <div className="list" ref={ref => this.container = ref}>
@@ -61,7 +60,7 @@ class App extends React.Component<Props, State> {
                     ref={ref => this.resultsList = ref}
                     query={query}
                     renderItem={({level}) => <LevelItem key={level.id} {...level} />}
-                    onLoaded={() => this.setState({loading: false})}
+                    statusChange={newStatus => this.setState({status: newStatus})}
                 />
             </div>
             <IntersectionObserver

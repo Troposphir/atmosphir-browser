@@ -10,7 +10,7 @@ interface Props {
     query: string;
     batchSize?: number;
     renderItem({level}: {level: BasicLevel}): ReactNode;
-    onLoaded(success: boolean): void;
+    statusChange(success?: boolean): void;
 }
 
 
@@ -89,10 +89,13 @@ export class SearchResults extends React.Component<Props, State> {
                 results: [],
                 resultsForQuery: this.props.query,
             },
-            () => this._load(0, this._batchSize)
-                .then(() => true)
-                .catch(() => false)
-                .then((result: boolean) => this.props.onLoaded(result))
+            () => {
+                this.props.statusChange();
+                return this._load(0, this._batchSize)
+                    .then(() => true)
+                    .catch(() => false)
+                    .then((result: boolean) => this.props.statusChange(result));
+            }
         );
     }
 

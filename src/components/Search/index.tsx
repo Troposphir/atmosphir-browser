@@ -1,4 +1,5 @@
 import * as React from "react";
+import { noop } from "lodash";
 
 import "./styles.scss";
 
@@ -6,13 +7,13 @@ import "./styles.scss";
 interface Props {
     query: string;
     queryChange: (query: string) => void;
-    search: () => void;
+    search?: () => void;
 }
 
 
 export class Search extends React.Component<Props> {
     render() {
-        const { query, queryChange, search } = this.props;
+        const { query, queryChange, search = noop } = this.props;
 
         return <form
             className="Search input-group"
