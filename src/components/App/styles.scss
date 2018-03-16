@@ -1,0 +1,49 @@
+@import "style/theme";
+
+.App {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: stretch;
+}
+
+.App > nav {
+  display: flex;
+  align-items: center;
+
+  padding: $default-spacing * 4;
+
+  background: rgba(0, 0, 0, 0.25);
+
+  & > * {
+    flex: 1;
+  }
+
+  & > img {
+    flex: unset;
+
+    margin-right: $default-spacing * 4;
+
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @include mobile {
+    flex-direction: column;
+
+    & > img {
+      margin-bottom: $default-spacing * 4;
+    }
+  }
+}
+
+.App > .list {
+  display: grid;
+  justify-content: center;
+
+  grid-template-columns: repeat(auto-fit, 200px);
+  grid-auto-rows: 200px;
+  grid-gap: 10px 10px;
+
+  margin: $default-spacing * 4;
+}

@@ -1,0 +1,32 @@
+input {
+  border: none;
+
+  &:focus::placeholder {
+    opacity: 0.25;
+  }
+}
+
+.input-group {
+  & :first-child {
+    border-bottom-left-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+  }
+
+  & :last-child {
+    border-bottom-right-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}
+
+.primary {
+  background: $color-primary;
+  color: white;
+
+  &:hover {
+    background: lighten($color-primary, 5%);
+  }
+
+  &:active {
+    background: darken($color-primary, 5%);
+  }
+}

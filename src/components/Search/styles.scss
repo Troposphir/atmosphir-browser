@@ -1,0 +1,16 @@
+@import "style/theme";
+
+.Search {
+    display: flex;
+
+    width: auto;
+    height: 3em;
+}
+
+.Search > input {
+    padding: $default-spacing * 3;
+}
+
+.Search > input[type=text] {
+    flex: 1;
+}
