@@ -6,6 +6,17 @@ $color-secondary: #1677c1;
 $color-secondary-dark: darken($color-secondary, 10%);
 
 $color-gold: #fec414;
+$color-green: #20a930;
+
+
+$theme-colors: (
+    "primary": $color-primary,
+    "primary-dark": $color-primary-dark,
+    "secondary": $color-secondary,
+    "secondary-dark": $color-secondary-dark,
+    "gold": $color-gold,
+    "green": $color-green,
+);
 
 
 // Spacings
@@ -16,7 +27,7 @@ $default-spacing: 4px;
 $border-radius: 5px;
 
 @mixin mobile {
-  @media screen and (max-width: 720px) {
-    @content;
-  }
+    @media screen and (max-width: 720px) {
+        @content;
+    }
 }

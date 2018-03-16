@@ -6,6 +6,16 @@ input {
   }
 }
 
+button {
+  border-radius: $border-radius !important;
+}
+
+input[type=submit], input[type=button], button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .input-group {
   & :first-child {
     border-bottom-left-radius: $border-radius;
@@ -18,15 +28,24 @@ input {
   }
 }
 
-.primary {
-  background: $color-primary;
-  color: white;
+@mixin color($color-name) {
+  $color: map-get($theme-colors, "#{$color-name}");
 
-  &:hover {
-    background: lighten($color-primary, 5%);
-  }
+  .#{$color-name} {
+    background: $color;
+    color: white;
 
-  &:active {
-    background: darken($color-primary, 5%);
+    &:hover {
+      background: lighten($color, 5%);
+    }
+
+    &:active {
+      background: darken($color, 5%);
+    }
   }
 }
+
+@include color(primary);
+@include color(secondary);
+@include color(gold);
+@include color(green);

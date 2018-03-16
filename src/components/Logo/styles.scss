@@ -10,7 +10,7 @@
     }
 }
 
-.Logo-icon {
+.Logo {
     padding-right: $default-spacing * 4;
     height: 64px;
 
@@ -19,10 +19,10 @@
     }
 }
 
-.Logo-icon.spinning #gear {
+.Logo.spinning #gear {
     animation: Logo-spin 10s infinite linear;
 }
 
-.Logo-icon.error #gear {
+.Logo.error #gear {
   fill: $color-primary;
 }

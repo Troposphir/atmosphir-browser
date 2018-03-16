@@ -1,0 +1,3 @@
+interface UserProfile {
+    avatarUrl: string;
+}

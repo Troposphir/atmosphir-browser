@@ -1,10 +1,15 @@
 @import "~purecss/build/base";
+@import "~purecss/build/buttons";
 
 @import "theme";
 
 @import "layered";
 @import "controls";
 
-html {
-  background: url("../img/background.jpg");
+body, html, #root {
+  height: 100%;
+
+  // Average color of the background.png image
+  // used to protect the App blur effect's margin
+  background-color: #122938;
 }

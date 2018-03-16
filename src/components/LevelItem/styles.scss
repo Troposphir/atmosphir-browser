@@ -134,13 +134,14 @@
     display: flex;
     align-items: center;
 
-    &::before {
+    padding-right: 0.2em;
+
+    > *::before {
         content: "";
         display: inline-block;
         background: url("../../img/star.svg") center no-repeat;
 
         width: 1em;
         height: 1em;
-        padding-right: 0.2em;
     }
 }

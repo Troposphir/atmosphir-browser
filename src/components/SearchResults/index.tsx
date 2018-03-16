@@ -2,21 +2,21 @@ import * as React from "react";
 import { ReactNode } from "react";
 import { debounce } from "lodash";
 
-import { BasicLevel } from "../../types/Level";
+import { FullLevel } from "../../types/Level";
 import { searchLevels } from "../../modules/atmo-server-connect";
 
 
 interface Props {
     query: string;
     batchSize?: number;
-    renderItem({level}: {level: BasicLevel}): ReactNode;
+    renderItem({level}: {level: FullLevel}): ReactNode;
     statusChange(success?: boolean): void;
 }
 
 
 interface State {
     total: number;
-    results: BasicLevel[];
+    results: FullLevel[];
     resultsForQuery?: string;
 }
 

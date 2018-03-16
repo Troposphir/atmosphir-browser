@@ -1,0 +1,20 @@
+@import "style/theme";
+
+.AuthoredContent {
+    display: flex;
+
+    > img {
+        width: 64px;
+        height: 64px;
+        margin-right: $default-spacing * 4;
+    }
+
+    > .info > .title {
+        font-weight: bold;
+    }
+
+    > .info > .author {
+        color: $color-secondary;
+        text-shadow: 0 0 2px black;
+    }
+}

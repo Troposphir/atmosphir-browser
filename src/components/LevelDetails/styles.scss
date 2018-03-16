@@ -1,0 +1,64 @@
+@import "style/theme";
+
+.LevelDetails {
+    display: grid;
+    grid: auto 1fr auto auto / auto 10em 10em;
+    grid-gap: $default-spacing * 4;
+    grid-template-areas:
+        "image    quality     difficulty "
+        "image    description description"
+        "credit   play        play       "
+        "comments comments    leaderboard";
+
+    padding: $default-spacing * 4;
+
+    @mixin area($name) {
+        > .#{$name} {
+            display: flex;
+            grid-area: $name;
+        }
+    }
+
+    @include area(image);
+    @include area(quality);
+    @include area(difficulty);
+    @include area(description);
+    @include area(credit);
+    @include area(play);
+    @include area(comments);
+    @include area(leaderboard);
+
+    > .quality, > .difficulty {
+        flex-direction: column;
+        align-items: flex-start;
+        color: #999;
+
+        > * {
+            color: white;
+        }
+    }
+
+    > .credit {
+        justify-content: stretch;
+        align-items: stretch;
+    }
+}
+
+@include mobile {
+    .LevelDetails {
+        grid: auto auto auto auto / 1fr 1fr;
+        grid-template-areas:
+            "image       image      "
+            "credit      credit     "
+            "quality     difficulty "
+            "description description"
+            "play        play       "
+            "leaderboard leaderboard"
+            "comments    comments   ";
+
+        > .image {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

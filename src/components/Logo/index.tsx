@@ -13,7 +13,7 @@ export class Logo extends React.Component<Props, {}> {
     render() {
         const { loading, error } = this.props;
 
-        let className = "Logo-icon";
+        let className = "Logo";
 
         if (loading) {
             className += " spinning";

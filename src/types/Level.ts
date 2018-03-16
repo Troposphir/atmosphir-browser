@@ -10,3 +10,12 @@ export interface BasicLevel {
     isXp: boolean;
     screenshotUrl: string;
 }
+
+export interface LevelDetails {
+    description: string;
+    version: number;
+    editable: boolean;
+    authorId: number;
+}
+
+export type FullLevel = BasicLevel & LevelDetails;

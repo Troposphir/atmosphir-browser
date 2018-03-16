@@ -1,5 +1,7 @@
 import * as React from "react";
 import { StatelessComponent } from "react";
+import { map, range } from "lodash";
+
 import { BasicLevel } from "../../types/Level";
 import { LevelBadge } from "../LevelBadge";
 
@@ -11,12 +13,15 @@ interface Props {
 }
 
 
-const Quality: StatelessComponent<{value?: number}> = ({value}) => <span className="Quality">
-    {value}
+export const Quality: StatelessComponent<{value?: number}> = ({value}) => <span className="Quality">
+    {map(
+        range(0, value, 1),
+        (_, i) => <span key={i}/>,
+    )}
 </span>;
 
 
-const Difficulty: StatelessComponent<{value?: number}> = ({value}) => {
+export const Difficulty: StatelessComponent<{value?: number}> = ({value}) => {
     if (value == null || value <= 0 || value > 5) {
         return null;
     }
