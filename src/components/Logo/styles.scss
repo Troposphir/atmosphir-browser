@@ -17,12 +17,16 @@
     #gear {
         transform-origin: 50.75% 53%;
     }
+
+    .Logo-main {
+        fill: $color-secondary;
+    }
 }
 
 .Logo.spinning #gear {
     animation: Logo-spin 10s infinite linear;
 }
 
-.Logo.error #gear {
+.Logo.error .Logo-main {
   fill: $color-primary;
 }
