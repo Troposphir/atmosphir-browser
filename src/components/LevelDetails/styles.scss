@@ -2,13 +2,13 @@
 
 .LevelDetails {
     display: grid;
-    grid: auto 1fr auto auto / auto 10em 10em;
+    grid: auto 1fr auto auto / 400px 10em 10em;
     grid-gap: $default-spacing * 4;
     grid-template-areas:
         "image    quality     difficulty "
         "image    description description"
         "credit   play        play       "
-        "comments comments    leaderboard";
+        "comments leaderboard leaderboard";
 
     padding: $default-spacing * 4;
 
@@ -41,6 +41,14 @@
     > .credit {
         justify-content: stretch;
         align-items: stretch;
+    }
+
+    > .comments {
+        flex-direction: column;
+
+        > *:not(:last-child) {
+            margin-bottom: $default-spacing * 4;
+        }
     }
 }
 

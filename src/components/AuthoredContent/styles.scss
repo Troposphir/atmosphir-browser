@@ -1,12 +1,21 @@
 @import "style/theme";
 
 .AuthoredContent {
-    display: flex;
+    display: grid;
+    grid: auto auto / auto 1fr;
+    grid-template-areas:
+        "avatar info   "
+        "avatar content";
 
     > img {
+        grid-area: avatar;
         width: 64px;
         height: 64px;
         margin-right: $default-spacing * 4;
+    }
+
+    > .info {
+        grid-area: info;
     }
 
     > .info > .title {
@@ -16,5 +25,9 @@
     > .info > .author {
         color: $color-secondary;
         text-shadow: 0 0 2px black;
+    }
+
+    > .content {
+        grid-area: content;
     }
 }

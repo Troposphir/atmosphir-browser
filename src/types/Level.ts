@@ -13,9 +13,9 @@ export interface BasicLevel {
 
 export interface LevelDetails {
     description: string;
-    version: number;
     editable: boolean;
     authorId: number;
+    playCount: number;
 }
 
 export type FullLevel = BasicLevel & LevelDetails;

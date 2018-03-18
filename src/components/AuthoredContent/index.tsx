@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ReactNode } from "react";
 
 import { getProfile } from "../../modules/atmo-server-connect";
 
@@ -9,7 +10,7 @@ interface Props {
     title?: string;
     authorId: number;
     name: string;
-    flair?: string;
+    flair?: ReactNode;
 }
 
 
@@ -57,7 +58,9 @@ export class AuthoredContent extends React.Component<Props, State> {
                 <div className="title">{title}</div>
                 <span className="author">{name}</span> {flair}
             </div>
-            {children}
+            <div className="content">
+                {children}
+            </div>
         </div>;
     }
 }

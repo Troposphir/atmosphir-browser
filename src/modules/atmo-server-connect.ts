@@ -1,5 +1,6 @@
 import * as superagent from "superagent";
 import { FullLevel } from "../types/Level";
+import { UserProfile, Comment } from "../types/User";
 
 
 const SERVER_ENDPOINT: URL = new URL(process.env.REACT_APP_SERVER_ENDPOINT || "");
@@ -67,8 +68,8 @@ export async function searchLevels(
                 isXp: item["xp.reward"] > 0,
                 screenshotUrl: screenshotUrl.toString(),
                 description: item["description"],
-                version: item["version"],
                 editable: item["editable"],
+                playCount: item["dc"],
             });
         }),
     };
@@ -90,4 +91,27 @@ export async function getProfile(userId: number): Promise<UserProfile> {
     return {
         avatarUrl: avatarUrl.toString(),
     };
+}
+
+
+export async function getComments(levelId: number): Promise<Comment[]> {
+    const { body: { fres: { results } } } = await request("getLevelCommentsReq", {
+        levelId,
+        freq: {
+            _t: "freq",
+            start: 0,
+            blockSize: 100, // If you ever get more than 100 comments on Atmosphir, we'll know!
+        },
+    });
+
+    const names = await Promise.all(results.map(async ({uid}: {uid: number}) => {
+        const response = await request("getUserByIdReq", {uid});
+        return response.body.user.username;
+    }));
+
+    return results.map(({uid, body}: {uid: number, body: string}, i: number) => ({
+        authorId: uid,
+        author: names[i],
+        body,
+    }));
 }
