@@ -1,8 +1,10 @@
 @import "style/theme";
 
+$image-size: 400px;
+
 .LevelDetails {
     display: grid;
-    grid: auto 1fr auto auto / 400px 10em 10em;
+    grid: auto 1fr auto auto / $image-size 10em 10em;
     grid-gap: $default-spacing * 4;
     grid-template-areas:
         "image    quality     difficulty "
@@ -54,7 +56,7 @@
 
 @include mobile {
     .LevelDetails {
-        grid: auto auto auto auto / 1fr 1fr;
+        grid: auto auto auto auto / auto auto;
         grid-template-areas:
             "image       image      "
             "credit      credit     "
@@ -66,7 +68,10 @@
 
         > .image {
             width: 100%;
+            max-width: $image-size;
             height: auto;
+
+            justify-self: center;
         }
     }
 }

@@ -1,23 +1,25 @@
 @import "style/theme";
 
 .Modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 100%;
     z-index: 100;
-
-    padding: $default-spacing * 8;
     overflow: auto;
 
     background: transparentize($color-secondary-dark, 0.5);
 
-    > .content {
+    > .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: $default-spacing * 8;
+    }
+
+    > .wrapper > .content {
         background: #333;
         color: white;
     }

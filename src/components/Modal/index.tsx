@@ -40,8 +40,10 @@ export class Modal extends React.Component<Props, {}> {
                 ev.preventDefault();
             }}
         >
-            <div className="content" onClick={ev => ev.stopPropagation()}>
-                {this.props.children}
+            <div className="wrapper">
+                <div className="content" onClick={ev => ev.stopPropagation()}>
+                    {this.props.children}
+                </div>
             </div>
         </div>;
     }
