@@ -47,6 +47,9 @@ export class Comments extends React.Component<Props, State> {
             >
                 {body}
             </AuthoredContent>)}
+            {comments.length === 0 && <>
+                No comments
+            </>}
         </>;
     }
 
