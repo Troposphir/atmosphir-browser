@@ -39,6 +39,10 @@ export class Modal extends React.Component<Props, {}> {
                 onDismiss();
                 ev.preventDefault();
             }}
+            onTouchEnd={ev => {
+                onDismiss();
+                ev.preventDefault();
+            }}
         >
             <div className="wrapper">
                 <div className="content" onClick={ev => ev.stopPropagation()}>
