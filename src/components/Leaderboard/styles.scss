@@ -1,0 +1,25 @@
+@import "style/theme";
+
+
+.Leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    &.loading {
+        opacity: 0.5;
+    }
+
+    > .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: $default-spacing * 4;
+    }
+}
+
+
+.Leaderboard-score {
+    float: right;
+}

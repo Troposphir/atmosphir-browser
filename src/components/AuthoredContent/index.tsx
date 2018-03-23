@@ -11,6 +11,7 @@ interface Props {
     authorId: number;
     name: string;
     flair?: ReactNode;
+    showAvatar?: boolean;
 }
 
 
@@ -20,6 +21,10 @@ interface State {
 
 
 export class AuthoredContent extends React.Component<Props, State> {
+    static defaultProps = {
+        showAvatar: true,
+    };
+
     constructor(props: Props) {
         super(props);
 
@@ -36,24 +41,21 @@ export class AuthoredContent extends React.Component<Props, State> {
     }
 
     render() {
-        const { title, authorId, flair, name, children } = this.props;
+        const { title, authorId, flair, name, showAvatar, children } = this.props;
         const { avatarUrl } = this.state;
 
         if (avatarUrl == null) {
             getProfile(authorId)
-                .then(({avatarUrl: newAvatarUrl}) => {
-                    console.log(newAvatarUrl);
-                    return this.setState({
-                        avatarUrl: newAvatarUrl
-                    });
-                });
+                .then(({avatarUrl: newAvatarUrl}) => this.setState({
+                    avatarUrl: newAvatarUrl,
+                }));
         }
 
         return <div className="AuthoredContent">
-            <img
+            {showAvatar && <img
                 src={avatarUrl}
                 alt={`${name}'s avatar`}
-            />
+            />}
             <div className="info">
                 <div className="title">{title}</div>
                 <span className="author">{name}</span> {flair}

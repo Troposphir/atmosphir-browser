@@ -1,6 +1,7 @@
 import * as superagent from "superagent";
 import { FullLevel } from "../types/Level";
 import { UserProfile, Comment } from "../types/User";
+import { ScoreEntry } from "../types/Score";
 
 
 const SERVER_ENDPOINT: URL = new URL(process.env.REACT_APP_SERVER_ENDPOINT || "");
@@ -10,6 +11,20 @@ const IMAGE_ENDPOINT: URL = new URL(process.env.REACT_APP_IMAGE_ENDPOINT || "");
 export interface PaginatedResults<T> {
     total: number;
     results: T[];
+}
+
+
+function paginate(
+    start: number,
+    count: number,
+) {
+    return {
+        freq: {
+            _t: "freq",
+            start,
+            blockSize: count,
+        },
+    };
 }
 
 
@@ -41,11 +56,7 @@ export async function searchLevels(
     const escapedQuery = JSON.stringify(query);
     const { body: { fres: response } } = await request("a_llsReq", {
         query: `(name:${escapedQuery} OR description:${escapedQuery} OR author:${escapedQuery})`,
-        freq: {
-            _t: "freq",
-            start: start,
-            blockSize: pageSize,
-        },
+        ...paginate(start, pageSize),
     });
 
     return {
@@ -97,11 +108,9 @@ export async function getProfile(userId: number): Promise<UserProfile> {
 export async function getComments(levelId: number): Promise<Comment[]> {
     const { body: { fres: { results } } } = await request("getLevelCommentsReq", {
         levelId,
-        freq: {
-            _t: "freq",
-            start: 0,
-            blockSize: 100, // If you ever get more than 100 comments on Atmosphir, we'll know!
-        },
+        // More than 100 comments is highly unlikely, winging
+        // it until there is any reason to expand this range.
+        ...paginate(0, 100),
     });
 
     const names = await Promise.all(results.map(async ({uid}: {uid: number}) => {
@@ -114,4 +123,41 @@ export async function getComments(levelId: number): Promise<Comment[]> {
         author: names[i],
         body,
     }));
+}
+
+
+export async function getLeaderboard(
+    levelId: number,
+    start: number,
+    count: number,
+): Promise<PaginatedResults<ScoreEntry>> {
+    const { body } = await request("getLeaderboardReq", {
+        cid: levelId,
+        ...paginate(start, count),
+    });
+
+    if (!("fres" in body)) {
+        return {
+            total: 0,
+            results: [],
+        };
+    }
+
+    const { fres: { results, total } } = body;
+
+    const names = await Promise.all(results.map(async ({uid}: {uid: number}) => {
+        const response = await request("getUserByIdReq", {uid});
+        return response.body.user.username;
+    }));
+
+    const scores = results.map(({uid, s1}: {uid: number, s1: number}, i: number) => ({
+        ownerId: uid,
+        owner: names[i],
+        score: s1,
+    }));
+
+    return {
+        total,
+        results: scores,
+    };
 }

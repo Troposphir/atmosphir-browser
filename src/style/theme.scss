@@ -1,9 +1,11 @@
 // Colors
 $color-primary: #fe4d1c;
 $color-primary-dark: darken($color-primary, 10%);
+$color-primary-light: lighten($color-primary, 15%);
 
 $color-secondary: #1677c1;
 $color-secondary-dark: darken($color-secondary, 10%);
+$color-secondary-light: lighten($color-secondary, 15%);
 
 $color-gold: #fec414;
 $color-green: #20a930;

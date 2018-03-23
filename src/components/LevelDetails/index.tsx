@@ -3,6 +3,7 @@ import * as React from "react";
 import { FullLevel } from "../../types/Level";
 import { Difficulty, Quality } from "../LevelItem";
 import { AuthoredContent } from "../AuthoredContent";
+import { Leaderboard } from "../Leaderboard";
 import { Comments } from "../Comments";
 
 import "./styles.scss";
@@ -48,6 +49,10 @@ export class LevelDetails extends React.Component<FullLevel, {}> {
             <button disabled={true} className="play pure-button green">
                 Play Now!
             </button>
+
+            <div className="leaderboard">
+                <Leaderboard levelId={id}/>
+            </div>
 
             <div className="comments">
                 <Comments levelId={id}/>

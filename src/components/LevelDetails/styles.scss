@@ -52,6 +52,12 @@ $image-size: 400px;
             margin-bottom: $default-spacing * 4;
         }
     }
+
+    > .leaderboard {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
 @include mobile {
