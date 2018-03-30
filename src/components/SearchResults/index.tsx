@@ -47,6 +47,10 @@ export class SearchResults extends React.Component<Props, State> {
         return 20;
     }
 
+    componentDidMount() {
+        this._loadFirst();
+    }
+
     componentDidUpdate({query: oldQuery}: Props, state: State) {
         const { query } = this.props;
 

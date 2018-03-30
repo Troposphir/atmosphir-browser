@@ -1,4 +1,5 @@
 import * as React from "react";
+import DocumentTitle from "react-document-title";
 
 import { FullLevel } from "../../types/Level";
 import { Difficulty, Quality } from "../LevelItem";
@@ -21,6 +22,7 @@ export class LevelDetails extends React.Component<FullLevel, {}> {
             id,
         } = this.props;
         return <div className="LevelDetails">
+            <DocumentTitle title={`${title} by ${author} - Troposphir`}/>
             <img src={screenshotUrl} className="image"/>
 
             <div className="quality">

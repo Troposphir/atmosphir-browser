@@ -12,7 +12,7 @@
 }
 
 .App.blur {
-  filter: blur(1rem);
+  filter: blur(1rem) brightness(150%) contrast(50%);
 }
 
 .App > nav {

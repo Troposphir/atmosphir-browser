@@ -23,6 +23,7 @@ export class Search extends React.Component<Props> {
             }}
         >
             <input
+                autoFocus={true}
                 type="text"
                 placeholder="Search Levels"
                 value={query}
