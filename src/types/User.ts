@@ -4,6 +4,7 @@ export interface UserProfile {
 
 
 export interface Comment {
+    id: number;
     authorId: number;
     author: string;
     body: string;

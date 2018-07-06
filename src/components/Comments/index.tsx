@@ -40,8 +40,8 @@ export class Comments extends React.Component<Props, State> {
         const { comments } = this.state;
         return <>
             <h2>Comments</h2>
-            {comments.map(({authorId, body, author}) => <AuthoredContent
-                key={authorId}
+            {comments.map(({id, authorId, body, author}) => <AuthoredContent
+                key={id}
                 authorId={authorId}
                 name={author}
             >

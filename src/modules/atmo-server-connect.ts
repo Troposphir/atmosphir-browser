@@ -118,7 +118,8 @@ export async function getComments(levelId: number): Promise<Comment[]> {
         return response.body.user.username;
     }));
 
-    return results.map(({uid, body}: {uid: number, body: string}, i: number) => ({
+    return results.map(({id, uid, body}: {id: number, uid: number, body: string}, i: number) => ({
+        id,
         authorId: uid,
         author: names[i],
         body,
