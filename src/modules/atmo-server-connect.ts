@@ -4,8 +4,17 @@ import { UserProfile, Comment } from "../types/User";
 import { ScoreEntry } from "../types/Score";
 
 
-const SERVER_ENDPOINT: URL = new URL(process.env.REACT_APP_SERVER_ENDPOINT || "");
-const IMAGE_ENDPOINT: URL = new URL(process.env.REACT_APP_IMAGE_ENDPOINT || "");
+const sameProtocolUrl = (url?: string): URL => {
+    const result = new URL(url || "");
+
+    result.protocol = window.location.protocol;
+
+    return result;
+};
+
+
+const SERVER_ENDPOINT: URL = sameProtocolUrl(process.env.REACT_APP_SERVER_ENDPOINT);
+const IMAGE_ENDPOINT: URL = sameProtocolUrl(process.env.REACT_APP_IMAGE_ENDPOINT);
 
 
 export interface PaginatedResults<T> {
@@ -53,9 +62,11 @@ export async function searchLevels(
     start: number,
     pageSize: number,
 ): Promise<PaginatedResults<FullLevel>> {
-    const escapedQuery = JSON.stringify(query);
+    const wrapped = query === ""
+        ? `(deleted:false AND draft:false)`
+        : `(deleted:false AND draft:false) AND (${query})`;
     const { body: { fres: response } } = await request("a_llsReq", {
-        query: `(name:${escapedQuery} OR description:${escapedQuery} OR author:${escapedQuery})`,
+        query: wrapped,
         ...paginate(start, pageSize),
     });
 
